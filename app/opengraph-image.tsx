@@ -45,6 +45,8 @@ export default function OgImage() {
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           <div
             style={{
+              display: "flex",
+              flexWrap: "wrap",
               fontSize: 72,
               fontWeight: 800,
               lineHeight: 1.05,
@@ -52,7 +54,7 @@ export default function OgImage() {
               maxWidth: 940,
             }}
           >
-            Más clientes para tu negocio, desde tu{" "}
+            <span>Más clientes para tu negocio, desde tu&nbsp;</span>
             <span style={{ color: "#E3A465" }}>WhatsApp</span>
           </div>
           <div style={{ fontSize: 30, color: "rgba(241,236,223,0.85)", maxWidth: 900 }}>
