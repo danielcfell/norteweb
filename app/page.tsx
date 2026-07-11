@@ -15,7 +15,7 @@
    ============================================================ */
 
 const NEGOCIO = "04 Tech";
-const WHATSAPP = "593999999999";
+const WHATSAPP = "593958948115";
 const waLink = (msg: string) =>
   `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 

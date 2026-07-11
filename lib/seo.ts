@@ -17,8 +17,8 @@ export const BUSINESS = {
   legalName: "04 Tech",
   slogan: "Páginas web, sistemas y bots de WhatsApp para el Carchi",
   /* NAP — idéntico en footer, schema y metadata */
-  phoneE164: "+593999999999",
-  whatsapp: "593999999999",
+  phoneE164: "+593958948115",
+  whatsapp: "593958948115",
   email: "hola@04tech.ec",
   street: "Tulcán",
   city: "Tulcán",
