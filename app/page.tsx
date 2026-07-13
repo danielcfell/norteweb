@@ -1,3 +1,4 @@
+import Image from "next/image";
 /* ============================================================
    04 Tech — landing (home /)
    Copywriting de respuesta directa · beneficio + CTA a WhatsApp.
@@ -103,7 +104,7 @@ const servicios: {
     desc: "Un asistente que contesta a tus clientes por WhatsApp a toda hora, agenda citas y responde las preguntas de siempre por ti. Automatiza lo repetitivo para que no pierdas ventas ni tiempo, ni cuando duermes.",
     para: "Responde WhatsApp solo · agenda citas · confirma pedidos · atención 24/7",
     mock: "/img/bot.webp",
-    alt: "Ilustración futurista de un bot de WhatsApp con inteligencia artificial respondiendo mensajes",
+    alt: "bot de WhatsApp atendiendo clientes de un negocio en Carchi",
     ancho: true,
   },
 ];
@@ -321,41 +322,6 @@ function Logo({
   );
 }
 
-/* Mockup de chat de WhatsApp para el hero — hecho en código, plano,
-   solo con la paleta de marca (verde/amarillo/crema). Sin neón ni glow. */
-function HeroChatMockup() {
-  const bubbleIn: React.CSSProperties = { alignSelf: "flex-start", maxWidth: "80%", background: T.cremaOsc, color: T.tinta, padding: "10px 13px", borderRadius: "14px 14px 14px 4px", fontSize: 14, lineHeight: 1.4 };
-  const bubbleOut: React.CSSProperties = { alignSelf: "flex-end", maxWidth: "82%", background: T.verde, color: T.cremaTx, padding: "10px 13px", borderRadius: "14px 14px 4px 14px", fontSize: 14, lineHeight: 1.4 };
-  return (
-    <div aria-hidden style={{ width: "100%", maxWidth: 400, margin: "0 auto" }}>
-      <div style={{ background: T.cremaClaro, borderRadius: 22, padding: 16, boxShadow: "0 24px 50px rgba(0,0,0,0.26)", border: "1px solid rgba(241,236,223,0.16)" }}>
-        {/* cabecera */}
-        <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "4px 4px 14px", borderBottom: `1px solid ${T.bordeSuave}` }}>
-          <span style={{ width: 42, height: 42, borderRadius: "50%", background: T.verde, display: "grid", placeItems: "center", color: T.cremaTx, fontFamily: DISPLAY, fontWeight: 800, fontSize: 15 }}>04</span>
-          <div>
-            <div style={{ fontFamily: DISPLAY, fontWeight: 700, fontSize: 15.5, color: T.tinta, letterSpacing: "-0.01em" }}>04 Tech</div>
-            <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12.5, color: T.verdeTx, fontWeight: 600 }}>
-              <span style={{ width: 7, height: 7, borderRadius: "50%", background: T.verde }} /> en línea
-            </div>
-          </div>
-        </div>
-        {/* mensajes */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 10, padding: "16px 4px 14px" }}>
-          <div style={bubbleIn}>Hola, ¿hacen páginas web?</div>
-          <div style={bubbleOut}>¡Claro! Tu página lista para Google y WhatsApp, desde $39.</div>
-          <div style={{ ...bubbleOut, maxWidth: "62%" }}>¿Te muestro cómo quedaría?</div>
-          <div style={{ ...bubbleIn, maxWidth: "52%" }}>¡Sí, por favor!</div>
-        </div>
-        {/* entrada */}
-        <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 4px 4px", borderTop: `1px solid ${T.bordeSuave}` }}>
-          <div style={{ flex: 1, height: 38, borderRadius: 19, background: T.crema, border: `1px solid ${T.borde}` }} />
-          <span style={{ width: 38, height: 38, borderRadius: "50%", background: T.amarillo, display: "grid", placeItems: "center", color: T.tinta, fontSize: 15, flexShrink: 0 }}>➤</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 /* Mapa de cobertura del Carchi — constelación de los 7 cantones en código.
    Posiciones geográficas aproximadas; plano, solo paleta de marca. */
 function ZonasMap() {
@@ -482,9 +448,17 @@ export default function Home() {
               </p>
             </div>
 
-            {/* mockup de chat de WhatsApp — hecho en código, solo paleta de marca */}
+            {/* foto documental del hero (next/image, con priority) */}
             <div className="hero-media" style={{ position: "relative" }}>
-              <HeroChatMockup />
+              <Image
+                src="/img/hero.webp"
+                alt="dueño de negocio en Tulcán usando WhatsApp en su celular"
+                width={1100}
+                height={733}
+                priority
+                sizes="(max-width: 1200px) 45vw, 480px"
+                style={{ width: "100%", height: "auto", borderRadius: 18, boxShadow: "0 30px 60px rgba(11,58,31,0.28)", border: "1px solid rgba(241,236,223,0.14)" }}
+              />
             </div>
           </div>
 
@@ -570,8 +544,7 @@ export default function Home() {
                         <a href={waLink("Hola 04 Tech, quiero un bot de WhatsApp con IA para mi negocio")} className="tlink">Quiero mi bot de WhatsApp →</a>
                       </div>
                       <div className="svc-wide-media">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={s.mock} alt={s.alt} loading="lazy" style={{ width: "100%", height: "auto", borderRadius: 14, border: `1px solid ${T.borde}`, boxShadow: "0 16px 34px rgba(11,58,31,0.16)" }} />
+                        <Image src={s.mock} alt={s.alt} width={1024} height={768} sizes="(max-width: 760px) 100vw, (max-width: 900px) 90vw, 460px" style={{ width: "100%", height: "auto", borderRadius: 14, border: `1px solid ${T.borde}`, boxShadow: "0 16px 34px rgba(11,58,31,0.16)" }} />
                       </div>
                     </div>
                   </article>
