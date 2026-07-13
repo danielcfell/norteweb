@@ -321,6 +321,104 @@ function Logo({
   );
 }
 
+/* Mockup de chat de WhatsApp para el hero — hecho en código, plano,
+   solo con la paleta de marca (verde/amarillo/crema). Sin neón ni glow. */
+function HeroChatMockup() {
+  const bubbleIn: React.CSSProperties = { alignSelf: "flex-start", maxWidth: "80%", background: T.cremaOsc, color: T.tinta, padding: "10px 13px", borderRadius: "14px 14px 14px 4px", fontSize: 14, lineHeight: 1.4 };
+  const bubbleOut: React.CSSProperties = { alignSelf: "flex-end", maxWidth: "82%", background: T.verde, color: T.cremaTx, padding: "10px 13px", borderRadius: "14px 14px 4px 14px", fontSize: 14, lineHeight: 1.4 };
+  return (
+    <div aria-hidden style={{ width: "100%", maxWidth: 400, margin: "0 auto" }}>
+      <div style={{ background: T.cremaClaro, borderRadius: 22, padding: 16, boxShadow: "0 24px 50px rgba(0,0,0,0.26)", border: "1px solid rgba(241,236,223,0.16)" }}>
+        {/* cabecera */}
+        <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "4px 4px 14px", borderBottom: `1px solid ${T.bordeSuave}` }}>
+          <span style={{ width: 42, height: 42, borderRadius: "50%", background: T.verde, display: "grid", placeItems: "center", color: T.cremaTx, fontFamily: DISPLAY, fontWeight: 800, fontSize: 15 }}>04</span>
+          <div>
+            <div style={{ fontFamily: DISPLAY, fontWeight: 700, fontSize: 15.5, color: T.tinta, letterSpacing: "-0.01em" }}>04 Tech</div>
+            <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12.5, color: T.verdeTx, fontWeight: 600 }}>
+              <span style={{ width: 7, height: 7, borderRadius: "50%", background: T.verde }} /> en línea
+            </div>
+          </div>
+        </div>
+        {/* mensajes */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 10, padding: "16px 4px 14px" }}>
+          <div style={bubbleIn}>Hola, ¿hacen páginas web?</div>
+          <div style={bubbleOut}>¡Claro! Tu página lista para Google y WhatsApp, desde $39.</div>
+          <div style={{ ...bubbleOut, maxWidth: "62%" }}>¿Te muestro cómo quedaría?</div>
+          <div style={{ ...bubbleIn, maxWidth: "52%" }}>¡Sí, por favor!</div>
+        </div>
+        {/* entrada */}
+        <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 4px 4px", borderTop: `1px solid ${T.bordeSuave}` }}>
+          <div style={{ flex: 1, height: 38, borderRadius: 19, background: T.crema, border: `1px solid ${T.borde}` }} />
+          <span style={{ width: 38, height: 38, borderRadius: "50%", background: T.amarillo, display: "grid", placeItems: "center", color: T.tinta, fontSize: 15, flexShrink: 0 }}>➤</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* Mapa de cobertura del Carchi — constelación de los 7 cantones en código.
+   Posiciones geográficas aproximadas; plano, solo paleta de marca. */
+function ZonasMap() {
+  const towns: { n: string; x: number; y: number; side: "l" | "r"; home?: boolean }[] = [
+    { n: "Tulcán", x: 168, y: 66, side: "r", home: true },
+    { n: "Julio Andrade", x: 236, y: 96, side: "r" },
+    { n: "Huaca", x: 244, y: 150, side: "r" },
+    { n: "San Gabriel", x: 178, y: 196, side: "r" },
+    { n: "El Ángel", x: 106, y: 182, side: "l" },
+    { n: "Bolívar", x: 150, y: 250, side: "r" },
+    { n: "Mira", x: 80, y: 258, side: "l" },
+  ];
+  const links = [[0, 1], [1, 2], [2, 3], [0, 3], [3, 4], [3, 5], [4, 6], [5, 6], [4, 5]];
+  const line = "rgba(241,236,223,0.30)";
+  return (
+    <svg
+      viewBox="0 0 340 340"
+      width="100%"
+      style={{ maxWidth: 420, display: "block" }}
+      role="img"
+      aria-label="Mapa de cobertura en la provincia del Carchi: Tulcán, Julio Andrade, San Gabriel, El Ángel, Bolívar, Mira y Huaca."
+    >
+      {/* marco tipo tarjeta de mapa */}
+      <rect x="8" y="8" width="324" height="324" rx="20" fill={T.verdeOsc} stroke="rgba(241,236,223,0.26)" />
+      {/* brújula */}
+      <text x="305" y="40" textAnchor="middle" fontFamily={SANS} fontSize="12" fontWeight="700" fill={T.cremaTx} opacity="0.8">N</text>
+      <path d="M305 44 L305 58 M305 44 L301 50 M305 44 L309 50" stroke={T.cremaTx} strokeWidth="1.5" opacity="0.7" fill="none" />
+      {/* conexiones */}
+      {links.map(([a, b], i) => (
+        <line key={i} x1={towns[a].x} y1={towns[a].y} x2={towns[b].x} y2={towns[b].y} stroke={line} strokeWidth="1.5" />
+      ))}
+      {/* nodos + etiquetas */}
+      {towns.map((t) => (
+        <g key={t.n}>
+          {t.home ? (
+            <>
+              <circle cx={t.x} cy={t.y} r="10" fill="none" stroke={T.amarillo} strokeWidth="2" opacity="0.55" />
+              <circle cx={t.x} cy={t.y} r="6.5" fill={T.amarillo} />
+            </>
+          ) : (
+            <circle cx={t.x} cy={t.y} r="5" fill={T.cremaTx} />
+          )}
+          <text
+            x={t.side === "r" ? t.x + 13 : t.x - 13}
+            y={t.y + 4}
+            textAnchor={t.side === "r" ? "start" : "end"}
+            fontFamily={SANS}
+            fontSize="12.5"
+            fontWeight={t.home ? 700 : 500}
+            fill={T.cremaTx}
+          >
+            {t.n}
+          </text>
+        </g>
+      ))}
+      {/* pie */}
+      <text x="24" y="316" fontFamily={SANS} fontSize="12" fontWeight="600" fill={T.cremaTx} opacity="0.72">
+        7 cantones · toda la provincia
+      </text>
+    </svg>
+  );
+}
+
 /* ============================================================ */
 export default function Home() {
   return (
@@ -384,10 +482,9 @@ export default function Home() {
               </p>
             </div>
 
-            {/* mockup de página web */}
+            {/* mockup de chat de WhatsApp — hecho en código, solo paleta de marca */}
             <div className="hero-media" style={{ position: "relative" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/img/hero.webp" alt="Ilustración futurista de tecnología para hacer crecer un negocio: smartphone y gráficos de ventas" fetchPriority="high" style={{ width: "100%", height: "auto", borderRadius: 18, boxShadow: "0 30px 60px rgba(0,0,0,0.34)", border: "1px solid rgba(241,236,223,0.14)" }} />
+              <HeroChatMockup />
             </div>
           </div>
 
@@ -554,10 +651,8 @@ export default function Home() {
               </a>
             </div>
 
-            <div className="zonas-img" style={{ position: "relative", minHeight: 480, overflow: "hidden", background: T.verde, display: "grid", placeItems: "center", padding: "clamp(28px,4vw,56px)" }}>
-              <div aria-hidden style={{ position: "absolute", inset: 0, background: `radial-gradient(80% 80% at 70% 20%, rgba(244,205,0,0.22) 0%, rgba(244,205,0,0) 55%)` }} />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/img/zonas.webp" alt="Mapa digital futurista que conecta los cantones del Carchi" loading="lazy" style={{ position: "relative", width: "min(78%, 360px)", height: "auto", borderRadius: 20, boxShadow: "0 26px 54px rgba(0,0,0,0.36)" }} />
+            <div className="zonas-img" style={{ position: "relative", minHeight: 480, background: T.verde, display: "grid", placeItems: "center", padding: "clamp(28px,4vw,56px)" }}>
+              <ZonasMap />
             </div>
           </div>
         </section>
