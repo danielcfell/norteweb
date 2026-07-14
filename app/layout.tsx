@@ -70,6 +70,9 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
+  verification: {
+    google: "XjDh2QT67rtVwYhaErzFMBR4vgRgfvQOxjr-gNFX3Fk",
+  },
   formatDetection: { telephone: true, address: true, email: true },
   other: {
     "geo.region": "EC-C",
