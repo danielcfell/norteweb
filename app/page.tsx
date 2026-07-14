@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "./JsonLd";
 import MobileNav from "./MobileNav";
-import { waLink, BUSINESS, SERVICIOS, PLANES, PAQUETE, FAQS, AREAS } from "@/lib/seo";
+import { waLink, BUSINESS, SERVICIOS, PLANES, PAQUETE, FAQS, AREAS, PROYECTOS } from "@/lib/seo";
 /* ============================================================
    04 Tech — landing (home /)
    Copywriting de respuesta directa · beneficio + CTA a WhatsApp.
@@ -109,6 +109,7 @@ const cantones = AREAS.map((n) => ({
 const planes = PLANES;
 const paquete = PAQUETE;
 const faqs = FAQS;
+const proyectos = PROYECTOS;
 
 /* ---------- CSS ---------- */
 const css = `
@@ -151,6 +152,12 @@ const css = `
   .chip { transition: background .16s ease, border-color .16s ease, color .16s ease; }
   .chip:hover { background:${T.verde}; border-color:${T.verde}; color:#FFF7EC; }
 
+  .testi { transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+  .testi:hover { transform: translateY(-4px); box-shadow: 0 22px 44px rgba(0,0,0,0.28); border-color: rgba(244,205,0,0.5); }
+
+  .plink { color:${T.amarillo}; font-weight:600; border-bottom:1.5px solid rgba(244,205,0,0.4); transition: color .15s ease, border-color .15s ease; }
+  .plink:hover { color:#fff; border-color:#fff; }
+
   .faq summary { list-style:none; cursor:pointer; }
   .faq summary::-webkit-details-marker { display:none; }
   .faq .faq-ic { transition: transform .25s ease; }
@@ -173,6 +180,7 @@ const css = `
     .paquete-grid { grid-template-columns: 1fr !important; }
     .zonas-grid { grid-template-columns: 1fr !important; }
     .zonas-img { min-height: 300px !important; order:-1; }
+    .testi-grid { grid-template-columns: 1fr !important; }
     .man-grid { grid-template-columns: 1fr !important; }
     .proc-grid { grid-template-columns: 1fr 1fr !important; }
   }
@@ -331,6 +339,7 @@ export default function Home() {
               <a href="#servicios" className="nv-link">Servicios</a>
               <a href="#proceso" className="nv-link">Cómo trabajamos</a>
               <a href="#zonas" className="nv-link">Zonas</a>
+              <a href="#proyectos" className="nv-link">Proyectos</a>
               <a href="#precios" className="nv-link">Precios</a>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
@@ -562,6 +571,66 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ================= PROYECTOS / PORTAFOLIO ================= */}
+        <section id="proyectos" style={{ padding: `${pad} 0`, background: T.verdeNoche, color: T.cremaTx, position: "relative", overflow: "hidden" }}>
+          <div aria-hidden style={{ position: "absolute", inset: 0, background: `radial-gradient(70% 90% at 85% 8%, rgba(244,205,0,0.12) 0%, rgba(244,205,0,0) 55%)`, pointerEvents: "none" }} />
+          <div style={{ ...wrap, position: "relative" }}>
+            <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 24, flexWrap: "wrap", marginBottom: "clamp(32px, 4vw, 56px)" }}>
+              <div style={{ maxWidth: 640 }}>
+                <Kicker bg={T.amarillo} fg={T.tinta}>Proyectos</Kicker>
+                <div style={{ height: 16 }} />
+                <Title color={T.cremaTx}>Trabajos que ya entregamos</Title>
+              </div>
+              <p style={{ margin: 0, fontSize: 16.5, lineHeight: 1.55, color: T.humo, maxWidth: "34ch" }}>
+                Sistemas y páginas reales, funcionando para negocios de aquí y de otras ciudades.
+              </p>
+            </div>
+
+            <div className="testi-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "clamp(16px, 2vw, 22px)" }}>
+              {proyectos.map((p) => (
+                <article key={p.titulo} className="testi" style={{ display: "flex", flexDirection: "column", background: "rgba(241,236,223,0.06)", border: "1px solid rgba(241,236,223,0.16)", borderRadius: 18, padding: "clamp(22px, 2.4vw, 30px)" }}>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, marginBottom: 16 }}>
+                    <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.3px", color: T.amarillo, background: "rgba(244,205,0,0.14)", border: "1px solid rgba(244,205,0,0.4)", padding: "4px 11px", borderRadius: 7 }}>{p.tipo}</span>
+                    <time dateTime={p.fechaIso} style={{ fontSize: 13, color: T.humo }}>{p.fecha}</time>
+                  </div>
+                  <h3 style={{ margin: "0 0 4px", fontFamily: DISPLAY, fontWeight: 800, fontSize: "clamp(22px, 2.3vw, 27px)", letterSpacing: "-0.025em", color: T.cremaTx }}>{p.titulo}</h3>
+                  <p style={{ margin: "0 0 16px", fontSize: 14, fontWeight: 600, color: T.amarillo }}>
+                    {p.cliente ? `${p.cliente} · ${p.lugar}` : p.lugar}
+                  </p>
+                  <p style={{ margin: "0 0 20px", fontSize: 15.5, lineHeight: 1.6, color: "rgba(241,236,223,0.9)", textWrap: "pretty" }}>{p.desc}</p>
+                  {(p.url || p.repo) && (
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 18, marginBottom: 20 }}>
+                      {p.url && (
+                        <a target="_blank" rel="noopener" href={p.url} className="plink" style={{ display: "inline-flex", alignItems: "center", gap: 7, fontSize: 14.5 }}>
+                          Ver sitio ↗
+                        </a>
+                      )}
+                      {p.repo && (
+                        <a target="_blank" rel="noopener" href={p.repo} className="plink" style={{ display: "inline-flex", alignItems: "center", gap: 7, fontSize: 14.5 }}>
+                          Ver código ↗
+                        </a>
+                      )}
+                    </div>
+                  )}
+                  <ul style={{ listStyle: "none", margin: "auto 0 0", padding: "18px 0 0", borderTop: "1px solid rgba(241,236,223,0.14)", display: "flex", flexWrap: "wrap", gap: 8 }}>
+                    {p.tags.map((tag) => (
+                      <li key={tag} style={{ fontSize: 12.5, fontWeight: 500, color: T.cremaTx, background: "rgba(241,236,223,0.08)", border: "1px solid rgba(241,236,223,0.16)", borderRadius: 7, padding: "5px 10px" }}>{tag}</li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+
+            <div style={{ marginTop: "clamp(32px, 4vw, 48px)", display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
+              <a target="_blank" rel="noopener" href={waLink("Hola 04 Tech, vi sus proyectos y quiero algo así para mi negocio")} className="btn-amar" style={{ display: "inline-flex", alignItems: "center", gap: 11, padding: "15px 30px", borderRadius: 11, fontSize: 16.5, fontWeight: 700 }}>
+                <WaIcon />
+                Quiero un proyecto así
+              </a>
+              <span style={{ fontSize: 14.5, color: T.humo }}>Cuéntanos tu idea y te decimos cómo lo hacemos.</span>
+            </div>
+          </div>
+        </section>
+
         {/* ================= PRECIOS ================= */}
         <section id="precios" style={{ padding: `${pad} 0`, background: T.cremaOsc, borderTop: `1px solid ${T.bordeSuave}` }}>
           <div style={wrap}>
@@ -699,6 +768,7 @@ export default function Home() {
             <a href="#servicios" className="footlink">Servicios</a>
             <a href="#proceso" className="footlink">Cómo trabajamos</a>
             <a href="#zonas" className="footlink">Zonas</a>
+            <a href="#proyectos" className="footlink">Proyectos</a>
             <a href="#precios" className="footlink">Precios</a>
             <a href="#faq" className="footlink">Preguntas frecuentes</a>
           </nav>

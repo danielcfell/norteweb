@@ -180,6 +180,58 @@ export const PAQUETE = {
     "Hola 04 Tech, quiero el PAQUETE COMPLETO por $99 (página web + sistema + bot)",
 };
 
+/* Portafolio de proyectos reales (tarjetas visibles en la sección
+   "Proyectos"). Trabajos verdaderos ya entregados — hechos, no reseñas
+   inventadas. `fechaIso` en AAAA-MM (para <time>/schema); `fecha` es el
+   texto que se muestra. Rellena `cliente`/`lugar` con el nombre real del
+   negocio cuando tengas su OK para mostrarlo. */
+export type Proyecto = {
+  titulo: string;   // nombre del producto o del trabajo
+  cliente: string;  // negocio para quien se hizo (vacío si no se muestra)
+  lugar: string;    // ciudad
+  tipo: string;     // etiqueta corta del tipo de trabajo
+  fecha: string;    // texto visible, p.ej. "Febrero 2026"
+  fechaIso: string; // AAAA-MM
+  desc: string;     // qué se construyó
+  tags: string[];   // funciones / tecnología destacada
+  url?: string;     // enlace al sitio en vivo (opcional → botón "Ver sitio")
+  repo?: string;    // enlace al repo de GitHub (opcional → botón "Ver código")
+};
+
+export const PROYECTOS: Proyecto[] = [
+  {
+    titulo: "Foody",
+    cliente: "Restaurante Cactus",
+    lugar: "Julio Andrade",
+    tipo: "Sistema a la medida",
+    fecha: "Febrero 2026",
+    fechaIso: "2026-02",
+    desc: "Sistema de facturación y gestión para el restaurante: registro de ventas, catálogo de productos, control de inventario y stock, todo en un solo lugar.",
+    tags: ["Facturación", "Ventas", "Inventario", "Stock"],
+    url: "https://foodyec.vercel.app",
+  },
+  {
+    titulo: "Psicología Para Ti",
+    cliente: "Centro de psicología",
+    lugar: "Quito",
+    tipo: "Landing page",
+    fecha: "Octubre 2025",
+    fechaIso: "2025-10",
+    desc: "Página de aterrizaje orientada a captar pacientes: presenta los servicios del centro y guía al visitante a agendar una cita.",
+    tags: ["Captación de clientes", "Diseño a medida", "Móvil"],
+  },
+  {
+    titulo: "danielsdev",
+    cliente: "Studio de software",
+    lugar: "En línea",
+    tipo: "Web · portafolio",
+    fecha: "Junio 2026",
+    fechaIso: "2026-06",
+    desc: "Sitio web enfocado en vender y servir de portafolio: muestra el trabajo del studio y convierte visitas en contactos.",
+    tags: ["Portafolio", "Ventas", "Diseño a medida"],
+  },
+];
+
 /* FAQ — DEBE coincidir palabra por palabra con FAQPage (JSON-LD) */
 export const FAQS = [
   {

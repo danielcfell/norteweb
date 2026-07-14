@@ -13,6 +13,7 @@ const LINKS: [string, string][] = [
   ["#servicios", "Servicios"],
   ["#proceso", "Cómo trabajamos"],
   ["#zonas", "Zonas"],
+  ["#proyectos", "Proyectos"],
   ["#precios", "Precios"],
   ["#faq", "Preguntas frecuentes"],
   ["#contacto", "Contacto"],
