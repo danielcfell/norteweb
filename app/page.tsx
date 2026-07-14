@@ -1,4 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
+import JsonLd from "./JsonLd";
+import { waLink, BUSINESS, SERVICIOS, PLANES, PAQUETE, FAQS, AREAS } from "@/lib/seo";
 /* ============================================================
    04 Tech — landing (home /)
    Copywriting de respuesta directa · beneficio + CTA a WhatsApp.
@@ -14,11 +17,6 @@ import Image from "next/image";
    Imágenes: mockups SVG limpios dibujados con la misma paleta — sin fotos externas.
    Tokens espejo en app/globals.css (:root).
    ============================================================ */
-
-const NEGOCIO = "04 Tech";
-const WHATSAPP = "593958948115";
-const waLink = (msg: string) =>
-  `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 
 const DISPLAY = "var(--font-bricolage), 'Arial Black', system-ui, sans-serif";
 const SANS = "var(--font-instrument), system-ui, sans-serif";
@@ -62,52 +60,35 @@ const T = {
    Generadas con la Inference API de Hugging Face (FLUX.1-schnell) y
    optimizadas a WebP en public/img/. Ver scripts/gen-site-images.mjs. */
 
-/* ---------- datos ---------- */
-const servicios: {
-  title: string;
-  desc: string;
-  para: string;
-  mock: string;
-  alt: string;
-  ancho?: boolean;
-}[] = [
-  {
-    title: "Página web en Tulcán",
-    desc: "Sal en Google cuando alguien busca lo que vendes y deja que te escriban al WhatsApp con un clic. Tu página lista para atraer clientes, no para adornar.",
-    para: "Restaurantes · hoteles · profesionales · comercios",
+/* ---------- datos ----------
+   El contenido (títulos, descripciones, precios, FAQ) vive en lib/seo.ts —
+   ÚNICA fuente de verdad, compartida con el JSON-LD para que lo visible y
+   el schema coincidan siempre. Aquí solo va la capa de presentación. */
+const media: Record<string, { mock: string; alt: string; ancho?: boolean }> = {
+  "pagina-web": {
     mock: "/img/pagina-web.webp",
     alt: "Ilustración futurista de una página web mostrada en una laptop y un celular",
   },
-  {
-    title: "Tienda en línea",
-    desc: "Muestra tus productos con fotos y precios, y recibe los pedidos directo en tu WhatsApp. Empieza a vender por internet aunque nunca lo hayas hecho.",
-    para: "Boutiques · ferreterías · productores · artesanos",
+  "tienda-en-linea": {
     mock: "/img/tienda.webp",
     alt: "Ilustración futurista de una tienda en línea con carrito de compras holográfico",
   },
-  {
-    title: "Sistema de facturación y más",
-    desc: "Factura, controla tu inventario, agenda citas, registra tus ventas y saca reportes desde un solo lugar. Un sistema a la medida de tu negocio pequeño, no una camisa de fuerza.",
-    para: "Facturación · inventario · citas · control de ventas · reportes",
+  "sistema-facturacion": {
     mock: "/img/sistema.webp",
     alt: "Ilustración futurista de un sistema de facturación con paneles de datos y reportes",
   },
-  {
-    title: "Soporte que no te abandona",
-    desc: "Después de lanzar seguimos contigo: cambios, contenido nuevo, tu ficha de Google Maps al día. Un mensaje de WhatsApp y lo resolvemos.",
-    para: "Para todo cliente de 04 Tech, mes a mes",
+  "soporte": {
     mock: "/img/soporte.webp",
     alt: "Ilustración futurista de soporte al cliente con interfaz de ayuda",
   },
-  {
-    title: "Bot de WhatsApp y automatización con IA",
-    desc: "Un asistente que contesta a tus clientes por WhatsApp a toda hora, agenda citas y responde las preguntas de siempre por ti. Automatiza lo repetitivo para que no pierdas ventas ni tiempo, ni cuando duermes.",
-    para: "Responde WhatsApp solo · agenda citas · confirma pedidos · atención 24/7",
+  "bot-whatsapp": {
     mock: "/img/bot-wa.webp",
-    alt: "bot de WhatsApp atendiendo clientes de un negocio en Carchi",
+    alt: "Robot asistente con el logo de WhatsApp en un celular, atendiendo clientes de un negocio en Carchi",
     ancho: true,
   },
-];
+};
+
+const servicios = SERVICIOS.map((s) => ({ ...s, ...media[s.id] }));
 
 const proceso = [
   { title: "Nos escribes", desc: "Cuéntanos por WhatsApp qué vendes y qué necesitas. Sin compromiso y sin tecnicismos, como hablar con un vecino." },
@@ -116,76 +97,17 @@ const proceso = [
   { title: "Empiezas a vender", desc: "Publicamos y quedamos cerca para lo que necesites. Desde el día uno todo queda a tu nombre." },
 ];
 
-const cantones = [
-  { canton: "Tulcán", nota: "nuestra casa" },
-  { canton: "Julio Andrade", nota: "" },
-  { canton: "San Gabriel · Montúfar", nota: "" },
-  { canton: "El Ángel · Espejo", nota: "" },
-  { canton: "Bolívar", nota: "" },
-  { canton: "Mira", nota: "" },
-  { canton: "Huaca", nota: "" },
-];
+/* cantones: nombres canónicos de lib/seo.ts + decoración visual local */
+const notas: Record<string, string> = { "Tulcán": "nuestra casa" };
+const sufijos: Record<string, string> = { "San Gabriel": "Montúfar", "El Ángel": "Espejo" };
+const cantones = AREAS.map((n) => ({
+  canton: sufijos[n] ? `${n} · ${sufijos[n]}` : n,
+  nota: notas[n] ?? "",
+}));
 
-const planes = [
-  {
-    nombre: "Página web",
-    precio: "$39",
-    lapso: "por servicio",
-    incluye: [
-      "Página web lista para Google y WhatsApp",
-      "Diseño a tu medida, se ve bien en el celular",
-      "Botón de WhatsApp y mapa de tu ubicación",
-      "Para que te encuentren en Tulcán y el Carchi",
-    ],
-    destacado: false,
-  },
-  {
-    nombre: "Sistema a la medida",
-    precio: "$39",
-    lapso: "por servicio",
-    incluye: [
-      "Sistema de facturación para tu negocio",
-      "Inventario, citas, control de ventas y reportes",
-      "Todo en un solo lugar, fácil de usar",
-      "Hecho a la medida de cómo trabajas",
-    ],
-    destacado: false,
-  },
-  {
-    nombre: "Bot y automatización",
-    precio: "$39",
-    lapso: "por servicio",
-    incluye: [
-      "Bot de WhatsApp que atiende 24/7",
-      "Agenda citas y confirma pedidos solo",
-      "Responde las preguntas de siempre por ti",
-      "No pierdes clientes ni cuando duermes",
-    ],
-    destacado: false,
-  },
-];
-
-const paquete = {
-  nombre: "Paquete completo",
-  precio: "$99",
-  antes: "los tres por separado costarían más",
-  lapso: "página web + sistema a la medida + bot con IA",
-  incluye: [
-    "Tu página web para que te encuentren",
-    "Tu sistema de facturación e inventario",
-    "Tu bot de WhatsApp que atiende 24/7",
-    "Todo integrado y trabajando para ti",
-  ],
-};
-
-const faqs = [
-  { q: "¿Cuánto cuesta una página web en Tulcán?", a: "Una página web cuesta $39. Un sistema a la medida (facturación, inventario, citas) también $39, y lo mismo el bot de WhatsApp con IA. Si quieres los tres juntos, el paquete completo es $99 — más barato que por separado. Escríbenos al WhatsApp y te confirmamos tu caso al toque." },
-  { q: "¿Atienden en Julio Andrade y el resto del Carchi?", a: "Sí. Hacemos páginas web, sistemas y bots para negocios de Tulcán, Julio Andrade, San Gabriel, El Ángel, Bolívar, Mira, Huaca y toda la provincia del Carchi. Coordinamos por WhatsApp o videollamada, y viajamos cuando el proyecto lo amerita." },
-  { q: "¿Qué es un bot de WhatsApp y para qué me sirve?", a: "Es un asistente que contesta a tus clientes por WhatsApp a toda hora: responde las preguntas de siempre, agenda citas y confirma pedidos por ti. Así no pierdes ventas cuando estás ocupado o dormido. Escríbenos y te mostramos cómo funcionaría en tu negocio." },
-  { q: "¿El sistema de facturación sirve para un negocio pequeño?", a: "Sí, está pensado justo para eso. Facturas, controlas tu inventario, agendas citas, registras ventas y sacas reportes desde un solo lugar, fácil de usar. Lo hacemos a la medida de cómo trabajas hoy." },
-  { q: "¿Necesito saber de tecnología?", a: "Para nada. Nosotros nos encargamos del dominio, el hosting y toda la parte técnica, y te explicamos lo importante en palabras simples. Tú solo atiendes tu negocio; de lo demás nos ocupamos nosotros." },
-  { q: "¿Todo queda a mi nombre?", a: "Sí. Tu página, tu sistema, tu contenido y los accesos son tuyos desde el primer día. Si algún día decides seguir con alguien más, te llevas todo contigo." },
-];
+const planes = PLANES;
+const paquete = PAQUETE;
+const faqs = FAQS;
 
 /* ---------- CSS ---------- */
 const css = `
@@ -389,6 +311,7 @@ function ZonasMap() {
 export default function Home() {
   return (
     <div className="fx" style={{ fontFamily: SANS, background: T.crema, color: T.tinta }}>
+      <JsonLd />
       <style dangerouslySetInnerHTML={{ __html: css }} />
 
       {/* ================= HERO ================= */}
@@ -400,9 +323,9 @@ export default function Home() {
         <div style={{ position: "relative", zIndex: 2, maxWidth: 1200, margin: "0 auto", padding: "22px clamp(20px, 4vw, 44px) clamp(30px, 4vw, 44px)", display: "flex", flexDirection: "column", minHeight: "100svh" }}>
           {/* nav */}
           <nav aria-label="Principal" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 20, paddingBottom: 18, borderBottom: "1px solid rgba(241,236,223,0.20)" }}>
-            <a href="#" aria-label="04 Tech — inicio" style={{ display: "inline-flex", alignItems: "center", color: T.cremaTx }}>
+            <Link href="/" aria-label="04 Tech — inicio" style={{ display: "inline-flex", alignItems: "center", color: T.cremaTx }}>
               <Logo size={34} />
-            </a>
+            </Link>
             <div className="nv-center" style={{ display: "flex", alignItems: "center", gap: 30, fontSize: 15, fontWeight: 500 }}>
               <a href="#servicios" className="nv-link">Servicios</a>
               <a href="#proceso" className="nv-link">Cómo trabajamos</a>
@@ -411,7 +334,7 @@ export default function Home() {
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
               <a href="#contacto" className="nv-link nv-contacto" style={{ fontSize: 15, fontWeight: 500 }}>Contacto</a>
-              <a href={waLink("Hola 04 Tech, quiero información sobre una página web")} className="btn-amar" style={{ padding: "10px 20px", borderRadius: 9, fontSize: 15, fontWeight: 600 }}>WhatsApp</a>
+              <a target="_blank" rel="noopener" href={waLink("Hola 04 Tech, quiero información sobre una página web")} className="btn-amar" style={{ padding: "10px 20px", borderRadius: 9, fontSize: 15, fontWeight: 600 }}>WhatsApp</a>
             </div>
           </nav>
 
@@ -436,7 +359,7 @@ export default function Home() {
               </p>
 
               <div style={{ display: "flex", alignItems: "center", gap: 22, flexWrap: "wrap" }}>
-                <a href={waLink("Hola 04 Tech, quiero más clientes para mi negocio. ¿Me ayudan?")} className="btn-amar hero-cta" style={{ display: "inline-flex", alignItems: "center", gap: 11, padding: "16px 30px", borderRadius: 11, fontSize: 17, fontWeight: 700, boxShadow: "0 14px 30px rgba(0,0,0,0.30)" }}>
+                <a target="_blank" rel="noopener" href={waLink("Hola 04 Tech, quiero más clientes para mi negocio. ¿Me ayudan?")} className="btn-amar hero-cta" style={{ display: "inline-flex", alignItems: "center", gap: 11, padding: "16px 30px", borderRadius: 11, fontSize: 17, fontWeight: 700, boxShadow: "0 14px 30px rgba(0,0,0,0.30)" }}>
                   <WaIcon />
                   Escríbenos por WhatsApp
                 </a>
@@ -493,7 +416,7 @@ export default function Home() {
                 te encuentren, te escriban y te compren — con tu página, tu sistema
                 y tu bot de WhatsApp.
               </p>
-              <a href={waLink("Hola 04 Tech, quiero que mi negocio aparezca en internet")} className="btn-verde" style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "14px 26px", borderRadius: 11, fontSize: 16, fontWeight: 700 }}>
+              <a target="_blank" rel="noopener" href={waLink("Hola 04 Tech, quiero que mi negocio aparezca en internet")} className="btn-verde" style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "14px 26px", borderRadius: 11, fontSize: 16, fontWeight: 700 }}>
                 <WaIcon />
                 Quiero que me encuentren
               </a>
@@ -541,7 +464,7 @@ export default function Home() {
                         <h3 style={{ margin: "0 0 12px", fontFamily: DISPLAY, fontWeight: 800, fontSize: "clamp(24px, 2.6vw, 31px)", letterSpacing: "-0.025em", color: T.tinta }}>{s.title}</h3>
                         <p style={{ margin: "0 0 18px", fontSize: 16, lineHeight: 1.62, color: T.tintaSuave, textWrap: "pretty" }}>{s.desc}</p>
                         <p style={{ margin: "0 0 18px", paddingTop: 14, borderTop: `1px solid ${T.bordeSuave}`, fontSize: 13.5, fontWeight: 600, color: T.verdeTx }}>{s.para}</p>
-                        <a href={waLink("Hola 04 Tech, quiero un bot de WhatsApp con IA para mi negocio")} className="tlink">Quiero mi bot de WhatsApp →</a>
+                        <a target="_blank" rel="noopener" href={waLink(s.waMsg)} className="tlink">Quiero mi bot de WhatsApp →</a>
                       </div>
                       <div className="svc-wide-media">
                         <Image src={s.mock} alt={s.alt} width={1024} height={768} sizes="(max-width: 760px) 100vw, (max-width: 900px) 90vw, 460px" style={{ width: "100%", height: "auto", borderRadius: 14, border: `1px solid ${T.borde}`, boxShadow: "0 16px 34px rgba(11,58,31,0.16)" }} />
@@ -551,7 +474,7 @@ export default function Home() {
                 ) : (
                   <article key={s.title} className="svc" style={{ background: T.crema, border: `1px solid ${T.borde}`, borderRadius: 18, padding: "clamp(20px, 2.2vw, 26px)", overflow: "hidden" }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={s.mock} alt={s.alt} loading="lazy" style={{ width: "100%", height: "auto", borderRadius: 12, marginBottom: 20, border: `1px solid ${T.borde}` }} />
+                    <img src={s.mock} alt={s.alt} width={1024} height={768} loading="lazy" style={{ width: "100%", height: "auto", borderRadius: 12, marginBottom: 20, border: `1px solid ${T.borde}` }} />
                     <h3 style={{ margin: "0 0 10px", fontFamily: DISPLAY, fontWeight: 800, fontSize: "clamp(22px, 2.3vw, 27px)", letterSpacing: "-0.025em", color: T.tinta }}>{s.title}</h3>
                     <p style={{ margin: "0 0 16px", fontSize: 16, lineHeight: 1.62, color: T.tintaSuave, textWrap: "pretty" }}>{s.desc}</p>
                     <p style={{ margin: 0, paddingTop: 14, borderTop: `1px solid ${T.bordeSuave}`, fontSize: 13.5, fontWeight: 600, color: T.verdeTx }}>{s.para}</p>
@@ -562,7 +485,7 @@ export default function Home() {
 
             <p style={{ margin: "28px 0 0", fontSize: 16, color: T.tintaSuave }}>
               ¿No sabes cuál necesitas?{" "}
-              <a href={waLink("Hola 04 Tech, no sé qué necesita mi negocio, ¿me ayudan a elegir?")} className="tlink">Escríbenos y te orientamos gratis</a>.
+              <a target="_blank" rel="noopener" href={waLink("Hola 04 Tech, no sé qué necesita mi negocio, ¿me ayudan a elegir?")} className="tlink">Escríbenos y te orientamos gratis</a>.
             </p>
           </div>
         </section>
@@ -590,7 +513,7 @@ export default function Home() {
             </ol>
 
             <div style={{ marginTop: "clamp(36px, 4vw, 52px)" }}>
-              <a href={waLink("Hola 04 Tech, quiero empezar mi proyecto")} className="btn-amar" style={{ display: "inline-flex", alignItems: "center", gap: 11, padding: "16px 32px", borderRadius: 11, fontSize: 17, fontWeight: 700 }}>
+              <a target="_blank" rel="noopener" href={waLink("Hola 04 Tech, quiero empezar mi proyecto")} className="btn-amar" style={{ display: "inline-flex", alignItems: "center", gap: 11, padding: "16px 32px", borderRadius: 11, fontSize: 17, fontWeight: 700 }}>
                 <WaIcon />
                 Empecemos por WhatsApp
               </a>
@@ -618,7 +541,7 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <a href={waLink("Hola 04 Tech, mi negocio está en el Carchi y quiero una página web")} className="btn-verde" style={{ display: "inline-flex", alignSelf: "flex-start", alignItems: "center", gap: 11, padding: "15px 30px", borderRadius: 11, fontSize: 16.5, fontWeight: 700 }}>
+              <a target="_blank" rel="noopener" href={waLink("Hola 04 Tech, mi negocio está en el Carchi y quiero una página web")} className="btn-verde" style={{ display: "inline-flex", alignSelf: "flex-start", alignItems: "center", gap: 11, padding: "15px 30px", borderRadius: 11, fontSize: 16.5, fontWeight: 700 }}>
                 <WaIcon />
                 Escríbenos desde tu ciudad
               </a>
@@ -651,7 +574,7 @@ export default function Home() {
                 <article key={p.nombre} className="plan" style={{ display: "flex", flexDirection: "column", background: T.cremaClaro, color: T.tinta, border: `1px solid ${T.borde}`, borderRadius: 18, padding: "clamp(24px, 2.4vw, 32px)" }}>
                   <h3 style={{ margin: "0 0 16px", fontFamily: DISPLAY, fontWeight: 800, fontSize: 22, letterSpacing: "-0.025em" }}>{p.nombre}</h3>
                   <p style={{ margin: "0 0 3px", display: "flex", alignItems: "baseline", gap: 8 }}>
-                    <span style={{ fontFamily: DISPLAY, fontWeight: 800, fontSize: "clamp(38px, 3.4vw, 48px)", letterSpacing: "-0.03em", lineHeight: 1, color: T.verde }}>{p.precio}</span>
+                    <span style={{ fontFamily: DISPLAY, fontWeight: 800, fontSize: "clamp(38px, 3.4vw, 48px)", letterSpacing: "-0.03em", lineHeight: 1, color: T.verde }}>${p.price}</span>
                     <span style={{ fontSize: 13.5, fontWeight: 600, color: T.tintaTenue }}>{p.lapso}</span>
                   </p>
                   <ul style={{ listStyle: "none", margin: "20px 0 24px", padding: 0, flex: 1 }}>
@@ -662,7 +585,7 @@ export default function Home() {
                       </li>
                     ))}
                   </ul>
-                  <a href={waLink(`Hola 04 Tech, quiero el servicio de ${p.nombre} por $39`)} className="plan-cta plan-cta-line" style={{ display: "inline-flex", justifyContent: "center", alignItems: "center", gap: 9, padding: "13px 20px", borderRadius: 11, fontSize: 15.5, fontWeight: 700, background: "transparent", color: T.tinta, border: `1.5px solid ${T.tinta}` }}>
+                  <a target="_blank" rel="noopener" href={waLink(p.waMsg)} className="plan-cta plan-cta-line" style={{ display: "inline-flex", justifyContent: "center", alignItems: "center", gap: 9, padding: "13px 20px", borderRadius: 11, fontSize: 15.5, fontWeight: 700, background: "transparent", color: T.tinta, border: `1.5px solid ${T.tinta}` }}>
                     Lo quiero por WhatsApp
                   </a>
                 </article>
@@ -679,11 +602,11 @@ export default function Home() {
                 </div>
                 <h3 style={{ margin: "0 0 10px", fontFamily: DISPLAY, fontWeight: 800, fontSize: "clamp(26px, 3vw, 36px)", letterSpacing: "-0.03em", color: T.cremaTx }}>{paquete.nombre}</h3>
                 <p style={{ margin: "0 0 6px", display: "flex", alignItems: "baseline", gap: 10 }}>
-                  <span style={{ fontFamily: DISPLAY, fontWeight: 800, fontSize: "clamp(48px, 5vw, 68px)", letterSpacing: "-0.04em", lineHeight: 1, color: T.amarillo }}>{paquete.precio}</span>
+                  <span style={{ fontFamily: DISPLAY, fontWeight: 800, fontSize: "clamp(48px, 5vw, 68px)", letterSpacing: "-0.04em", lineHeight: 1, color: T.amarillo }}>${paquete.price}</span>
                   <span style={{ fontSize: 14.5, color: "rgba(241,236,223,0.7)" }}>{paquete.antes}</span>
                 </p>
                 <p style={{ margin: "0 0 18px", fontSize: 15.5, fontWeight: 600, color: T.humo }}>{paquete.lapso}</p>
-                <a href={waLink("Hola 04 Tech, quiero el PAQUETE COMPLETO por $99 (página web + sistema + bot)")} className="btn-amar" style={{ display: "inline-flex", alignItems: "center", gap: 11, padding: "16px 32px", borderRadius: 11, fontSize: 17, fontWeight: 700, boxShadow: "0 14px 30px rgba(0,0,0,0.32)" }}>
+                <a target="_blank" rel="noopener" href={waLink(paquete.waMsg)} className="btn-amar" style={{ display: "inline-flex", alignItems: "center", gap: 11, padding: "16px 32px", borderRadius: 11, fontSize: 17, fontWeight: 700, boxShadow: "0 14px 30px rgba(0,0,0,0.32)" }}>
                   <WaIcon />
                   Quiero el paquete de $99
                 </a>
@@ -725,7 +648,7 @@ export default function Home() {
             </div>
             <p style={{ margin: "26px 0 0", fontSize: 16, color: T.tintaSuave }}>
               ¿Tienes otra pregunta?{" "}
-              <a href={waLink("Hola 04 Tech, tengo una pregunta sobre mi página web / sistema / bot")} className="tlink">Escríbenos al WhatsApp</a>, te respondemos hoy.
+              <a target="_blank" rel="noopener" href={waLink("Hola 04 Tech, tengo una pregunta sobre mi página web / sistema / bot")} className="tlink">Escríbenos al WhatsApp</a>, te respondemos hoy.
             </p>
           </div>
         </section>
@@ -740,7 +663,7 @@ export default function Home() {
               con el precio y los siguientes pasos — sin compromiso. Página web,
               sistema o bot de WhatsApp, desde $39.
             </p>
-            <a href={waLink("Hola 04 Tech, quiero conseguir más clientes. ¿Empezamos?")} className="btn-amar" style={{ display: "inline-flex", alignItems: "center", gap: 11, padding: "18px 40px", borderRadius: 12, fontSize: 17.5, fontWeight: 700, boxShadow: "0 16px 36px rgba(0,0,0,0.28)" }}>
+            <a target="_blank" rel="noopener" href={waLink("Hola 04 Tech, quiero conseguir más clientes. ¿Empezamos?")} className="btn-amar" style={{ display: "inline-flex", alignItems: "center", gap: 11, padding: "18px 40px", borderRadius: 12, fontSize: 17.5, fontWeight: 700, boxShadow: "0 16px 36px rgba(0,0,0,0.28)" }}>
               <WaIcon />
               Escríbenos por WhatsApp ahora
             </a>
@@ -773,13 +696,16 @@ export default function Home() {
           </nav>
           <div style={{ display: "flex", flexDirection: "column", gap: 12, fontSize: 15 }}>
             <p style={{ margin: "0 0 4px", fontSize: 12.5, fontWeight: 700, letterSpacing: "0.4px", color: "rgba(241,236,223,0.42)" }}>Contacto</p>
-            <a href={waLink("Hola 04 Tech, quiero información")} className="footlink">WhatsApp</a>
-            <p style={{ margin: 0 }}>Tulcán, Carchi — Ecuador</p>
+            <a target="_blank" rel="noopener" href={waLink("Hola 04 Tech, quiero información")} className="footlink">WhatsApp</a>
+            {/* NAP visible — debe coincidir con el JSON-LD (lib/seo.ts) */}
+            <a href={`tel:${BUSINESS.phoneE164}`} className="footlink">+593 95 894 8115</a>
+            <a href={`mailto:${BUSINESS.email}`} className="footlink">{BUSINESS.email}</a>
+            <p style={{ margin: 0 }}>{BUSINESS.city}, {BUSINESS.region} — {BUSINESS.countryName}</p>
           </div>
         </div>
         <div style={wrap}>
           <div style={{ borderTop: "1px solid rgba(241,236,223,0.12)", padding: "18px 0 24px", display: "flex", flexWrap: "wrap", gap: 12, justifyContent: "space-between", fontSize: 12.5, color: "rgba(241,236,223,0.44)" }}>
-            <p style={{ margin: 0 }}>© {new Date().getFullYear()} {NEGOCIO} · Tulcán, Carchi</p>
+            <p style={{ margin: 0 }}>© {new Date().getFullYear()} {BUSINESS.name} · Tulcán, Carchi</p>
             <p style={{ margin: 0 }}>Diseño web · sistemas · bots con IA en el Carchi</p>
           </div>
         </div>

@@ -1,5 +1,7 @@
 import sharp from "sharp";
 
+// La imagen fuente fue removida de public/ (limpieza); recupérala con:
+//   git show ad5e687:public/img/bot-robot-2.webp > public/img/bot-robot-2.webp
 const SRC = "public/img/bot-robot-2.webp";
 const OUT = process.argv[2] || "public/img/_bot-preview.webp";
 
