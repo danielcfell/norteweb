@@ -103,7 +103,7 @@ const servicios: {
     title: "Bot de WhatsApp y automatización con IA",
     desc: "Un asistente que contesta a tus clientes por WhatsApp a toda hora, agenda citas y responde las preguntas de siempre por ti. Automatiza lo repetitivo para que no pierdas ventas ni tiempo, ni cuando duermes.",
     para: "Responde WhatsApp solo · agenda citas · confirma pedidos · atención 24/7",
-    mock: "/img/bot.webp",
+    mock: "/img/bot-wa.webp",
     alt: "bot de WhatsApp atendiendo clientes de un negocio en Carchi",
     ancho: true,
   },
