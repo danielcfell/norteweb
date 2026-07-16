@@ -26,8 +26,8 @@ const DESCRIPTION =
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Páginas web, sistemas y bots de WhatsApp en Tulcán, Carchi | 04 Tech",
-    template: "%s | 04 Tech",
+    default: "Páginas web, sistemas y bots de WhatsApp en Tulcán, Carchi | NorteWeb",
+    template: "%s | NorteWeb",
   },
   description: DESCRIPTION,
   applicationName: BUSINESS.name,
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     "bot de WhatsApp",
     "sistema de facturación Carchi",
     "tienda en línea Tulcán",
-    "04 Tech",
+    "NorteWeb",
   ],
   alternates: {
     canonical: "/",
@@ -51,20 +51,20 @@ export const metadata: Metadata = {
     locale: "es_EC",
     url: `${SITE_URL}/`,
     siteName: BUSINESS.name,
-    title: "Páginas web, sistemas y bots de WhatsApp en Tulcán, Carchi | 04 Tech",
+    title: "Páginas web, sistemas y bots de WhatsApp en Tulcán, Carchi | NorteWeb",
     description: DESCRIPTION,
     images: [
       {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "04 Tech — páginas web, sistemas y bots de WhatsApp en Tulcán y el Carchi",
+        alt: "NorteWeb — páginas web, sistemas y bots de WhatsApp en Tulcán y el Carchi",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Páginas web, sistemas y bots de WhatsApp en Tulcán, Carchi | 04 Tech",
+    title: "Páginas web, sistemas y bots de WhatsApp en Tulcán, Carchi | NorteWeb",
     description: DESCRIPTION,
     images: ["/opengraph-image"],
   },

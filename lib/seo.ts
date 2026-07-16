@@ -8,21 +8,21 @@
    ============================================================ */
 
 /* .trim() en toda env var usada en URLs (bug conocido de \n en Vercel)
-   TODO: al comprar el dominio (p.ej. 04tech.ec), conectarlo en Vercel →
+   TODO: al comprar el dominio (p.ej. norteweb.ec), conectarlo en Vercel →
    Settings → Domains y cambiar este fallback (o setear NEXT_PUBLIC_SITE_URL).
    El canonical DEBE apuntar al dominio que realmente sirve el sitio. */
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://04tech.vercel.app"
+  process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://norteweb.vercel.app"
 ).replace(/\/+$/, "");
 
 export const BUSINESS = {
-  name: "04 Tech",
-  legalName: "04 Tech",
+  name: "NorteWeb",
+  legalName: "NorteWeb",
   slogan: "Páginas web, sistemas y bots de WhatsApp para el Carchi",
   /* NAP — idéntico en footer, schema y metadata */
   phoneE164: "+593958948115",
   whatsapp: "593958948115",
-  /* TODO: cambiar a hola@04tech.ec cuando exista el dominio y su correo */
+  /* TODO: cambiar a hola@norteweb.ec cuando exista el dominio y su correo */
   email: "danielcfell98@gmail.com",
   street: "Tulcán",
   city: "Tulcán",
@@ -34,7 +34,7 @@ export const BUSINESS = {
   /* geo aproximado de Tulcán */
   latitude: 0.812222,
   longitude: -77.717778,
-  founder: "04 Tech",
+  founder: "NorteWeb",
 } as const;
 
 export const waLink = (msg: string) =>
@@ -77,7 +77,7 @@ export const SERVICIOS: Servicio[] = [
     para: "Restaurantes · hoteles · profesionales · comercios",
     price: PRICE_SINGLE,
     schemaType: "WebSite",
-    waMsg: "Hola 04 Tech, quiero una página web para mi negocio por $39",
+    waMsg: "Hola NorteWeb, quiero una página web para mi negocio por $39",
   },
   {
     id: "tienda-en-linea",
@@ -87,7 +87,7 @@ export const SERVICIOS: Servicio[] = [
     para: "Boutiques · ferreterías · productores · artesanos",
     price: PRICE_SINGLE,
     schemaType: "WebSite",
-    waMsg: "Hola 04 Tech, quiero una tienda en línea por $39",
+    waMsg: "Hola NorteWeb, quiero una tienda en línea por $39",
   },
   {
     id: "sistema-facturacion",
@@ -97,17 +97,17 @@ export const SERVICIOS: Servicio[] = [
     para: "Facturación · inventario · citas · control de ventas · reportes",
     price: PRICE_SINGLE,
     schemaType: "SoftwareApplication",
-    waMsg: "Hola 04 Tech, quiero un sistema de facturación por $39",
+    waMsg: "Hola NorteWeb, quiero un sistema de facturación por $39",
   },
   {
     id: "soporte",
     title: "Soporte que no te abandona",
     h3: "Soporte que no te abandona",
     desc: "Después de lanzar seguimos contigo: cambios, contenido nuevo, tu ficha de Google Maps al día. Un mensaje de WhatsApp y lo resolvemos.",
-    para: "Para todo cliente de 04 Tech, mes a mes",
+    para: "Para todo cliente de NorteWeb, mes a mes",
     price: PRICE_SINGLE,
     schemaType: "Service",
-    waMsg: "Hola 04 Tech, quiero soporte y mejoras para mi página",
+    waMsg: "Hola NorteWeb, quiero soporte y mejoras para mi página",
   },
   {
     id: "bot-whatsapp",
@@ -117,7 +117,7 @@ export const SERVICIOS: Servicio[] = [
     para: "Responde WhatsApp solo · agenda citas · confirma pedidos · atención 24/7",
     price: PRICE_SINGLE,
     schemaType: "Service",
-    waMsg: "Hola 04 Tech, quiero un bot de WhatsApp con IA para mi negocio",
+    waMsg: "Hola NorteWeb, quiero un bot de WhatsApp con IA para mi negocio",
   },
 ];
 
@@ -134,7 +134,7 @@ export const PLANES = [
       "Botón de WhatsApp y mapa de tu ubicación",
       "Para que te encuentren en Tulcán y el Carchi",
     ],
-    waMsg: "Hola 04 Tech, quiero el servicio de Página web por $39",
+    waMsg: "Hola NorteWeb, quiero el servicio de Página web por $39",
   },
   {
     id: "plan-sistema",
@@ -147,7 +147,7 @@ export const PLANES = [
       "Todo en un solo lugar, fácil de usar",
       "Hecho a la medida de cómo trabajas",
     ],
-    waMsg: "Hola 04 Tech, quiero el servicio de Sistema a la medida por $39",
+    waMsg: "Hola NorteWeb, quiero el servicio de Sistema a la medida por $39",
   },
   {
     id: "plan-bot",
@@ -160,7 +160,7 @@ export const PLANES = [
       "Responde las preguntas de siempre por ti",
       "No pierdes clientes ni cuando duermes",
     ],
-    waMsg: "Hola 04 Tech, quiero el servicio de Bot y automatización por $39",
+    waMsg: "Hola NorteWeb, quiero el servicio de Bot y automatización por $39",
   },
 ];
 
@@ -177,7 +177,7 @@ export const PAQUETE = {
     "Todo integrado y trabajando para ti",
   ],
   waMsg:
-    "Hola 04 Tech, quiero el PAQUETE COMPLETO por $99 (página web + sistema + bot)",
+    "Hola NorteWeb, quiero el PAQUETE COMPLETO por $99 (página web + sistema + bot)",
 };
 
 /* Portafolio de proyectos reales (tarjetas visibles en la sección

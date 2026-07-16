@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ============================================================
-   04 Tech — tokens de color (ÚNICA FUENTE base)
+   NorteWeb — tokens de color (ÚNICA FUENTE base)
    Paleta = bandera de la provincia del Carchi + crema de fondo.
    No introducir ningún otro color en el sitio.
    El componente de la landing (app/page.tsx) refleja estos

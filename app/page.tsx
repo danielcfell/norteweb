@@ -4,7 +4,7 @@ import JsonLd from "./JsonLd";
 import MobileNav from "./MobileNav";
 import { waLink, BUSINESS, SERVICIOS, PLANES, PAQUETE, FAQS, AREAS, PROYECTOS } from "@/lib/seo";
 /* ============================================================
-   04 Tech — landing (home /)
+   NorteWeb — landing (home /)
    Copywriting de respuesta directa · beneficio + CTA a WhatsApp.
    Paleta bloqueada = bandera de la provincia del Carchi + crema:
      crema    #E9E4D6  (fondo · aire y legibilidad)
@@ -228,10 +228,12 @@ const WaIcon = () => (
   <span aria-hidden style={{ width: 22, height: 22, borderRadius: "50%", background: "rgba(255,247,236,0.24)", display: "grid", placeItems: "center", fontSize: 13 }}>✆</span>
 );
 
-/* Logo 04 Tech — isotipo "Nodo 04": el 0 es un anillo y el nodo marca las 4:00.
+/* Logo NorteWeb — isotipo "Nodo 04": el 0 es un anillo y el nodo marca las 4:00.
    Importado del proyecto de diseño de claude.ai (artboard 2a "Nodo 04 · sistema
    completo"), redibujado con los tokens de la paleta del sitio. `nodeStroke` es
-   el halo del nodo: debe igualar el color de fondo donde se coloca el logo. */
+   el halo del nodo: debe igualar el color de fondo donde se coloca el logo.
+   Isotipo heredado del branding anterior (04 Tech) — pendiente de rediseño
+   propio para NorteWeb; por ahora se mantiene solo el anillo+nodo. */
 function Logo({
   size = 34,
   ring = T.cremaTx,
@@ -246,8 +248,8 @@ function Logo({
         <circle cx="51.9" cy="43.5" r="8" fill={node} stroke={nodeStroke} strokeWidth="4" />
       </svg>
       <span style={{ fontFamily: DISPLAY, fontSize: size * 0.6, letterSpacing: "-0.03em", color: word, lineHeight: 1 }}>
-        <span style={{ fontWeight: 800 }}>04</span>
-        <span style={{ fontWeight: 500, opacity: 0.92 }}>tech</span>
+        <span style={{ fontWeight: 800 }}>Norte</span>
+        <span style={{ fontWeight: 500, opacity: 0.92 }}>Web</span>
       </span>
     </span>
   );
@@ -332,7 +334,7 @@ export default function Home() {
         <div style={{ position: "relative", zIndex: 2, maxWidth: 1200, margin: "0 auto", padding: "22px clamp(20px, 4vw, 44px) clamp(30px, 4vw, 44px)", display: "flex", flexDirection: "column", minHeight: "100svh" }}>
           {/* nav */}
           <nav aria-label="Principal" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 20, paddingBottom: 18, borderBottom: "1px solid rgba(241,236,223,0.20)" }}>
-            <Link href="/" aria-label="04 Tech — inicio" style={{ display: "inline-flex", alignItems: "center", color: T.cremaTx }}>
+            <Link href="/" aria-label="NorteWeb — inicio" style={{ display: "inline-flex", alignItems: "center", color: T.cremaTx }}>
               <Logo size={34} />
             </Link>
             <div className="nv-center" style={{ display: "flex", alignItems: "center", gap: 30, fontSize: 15, fontWeight: 500 }}>
@@ -344,7 +346,7 @@ export default function Home() {
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
               <a href="#contacto" className="nv-link nv-contacto" style={{ fontSize: 15, fontWeight: 500 }}>Contacto</a>
-              <a target="_blank" rel="noopener" href={waLink("Hola 04 Tech, quiero información sobre una página web")} className="btn-amar" style={{ padding: "10px 20px", borderRadius: 9, fontSize: 15, fontWeight: 600 }}>WhatsApp</a>
+              <a target="_blank" rel="noopener" href={waLink("Hola NorteWeb, quiero información sobre una página web")} className="btn-amar" style={{ padding: "10px 20px", borderRadius: 9, fontSize: 15, fontWeight: 600 }}>WhatsApp</a>
               <MobileNav />
             </div>
           </nav>
@@ -370,7 +372,7 @@ export default function Home() {
               </p>
 
               <div style={{ display: "flex", alignItems: "center", gap: 22, flexWrap: "wrap" }}>
-                <a target="_blank" rel="noopener" href={waLink("Hola 04 Tech, quiero más clientes para mi negocio. ¿Me ayudan?")} className="btn-amar hero-cta" style={{ display: "inline-flex", alignItems: "center", gap: 11, padding: "16px 30px", borderRadius: 11, fontSize: 17, fontWeight: 700, boxShadow: "0 14px 30px rgba(0,0,0,0.30)" }}>
+                <a target="_blank" rel="noopener" href={waLink("Hola NorteWeb, quiero más clientes para mi negocio. ¿Me ayudan?")} className="btn-amar hero-cta" style={{ display: "inline-flex", alignItems: "center", gap: 11, padding: "16px 30px", borderRadius: 11, fontSize: 17, fontWeight: 700, boxShadow: "0 14px 30px rgba(0,0,0,0.30)" }}>
                   <WaIcon />
                   Escríbenos por WhatsApp
                 </a>
@@ -432,7 +434,7 @@ export default function Home() {
                 te encuentren, te escriban y te compren — con tu página, tu sistema
                 y tu bot de WhatsApp.
               </p>
-              <a target="_blank" rel="noopener" href={waLink("Hola 04 Tech, quiero que mi negocio aparezca en internet")} className="btn-verde" style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "14px 26px", borderRadius: 11, fontSize: 16, fontWeight: 700 }}>
+              <a target="_blank" rel="noopener" href={waLink("Hola NorteWeb, quiero que mi negocio aparezca en internet")} className="btn-verde" style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "14px 26px", borderRadius: 11, fontSize: 16, fontWeight: 700 }}>
                 <WaIcon />
                 Quiero que me encuentren
               </a>
@@ -501,7 +503,7 @@ export default function Home() {
 
             <p style={{ margin: "28px 0 0", fontSize: 16, color: T.tintaSuave }}>
               ¿No sabes cuál necesitas?{" "}
-              <a target="_blank" rel="noopener" href={waLink("Hola 04 Tech, no sé qué necesita mi negocio, ¿me ayudan a elegir?")} className="tlink">Escríbenos y te orientamos gratis</a>.
+              <a target="_blank" rel="noopener" href={waLink("Hola NorteWeb, no sé qué necesita mi negocio, ¿me ayudan a elegir?")} className="tlink">Escríbenos y te orientamos gratis</a>.
             </p>
           </div>
         </section>
@@ -529,7 +531,7 @@ export default function Home() {
             </ol>
 
             <div style={{ marginTop: "clamp(36px, 4vw, 52px)" }}>
-              <a target="_blank" rel="noopener" href={waLink("Hola 04 Tech, quiero empezar mi proyecto")} className="btn-amar" style={{ display: "inline-flex", alignItems: "center", gap: 11, padding: "16px 32px", borderRadius: 11, fontSize: 17, fontWeight: 700 }}>
+              <a target="_blank" rel="noopener" href={waLink("Hola NorteWeb, quiero empezar mi proyecto")} className="btn-amar" style={{ display: "inline-flex", alignItems: "center", gap: 11, padding: "16px 32px", borderRadius: 11, fontSize: 17, fontWeight: 700 }}>
                 <WaIcon />
                 Empecemos por WhatsApp
               </a>
@@ -557,7 +559,7 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <a target="_blank" rel="noopener" href={waLink("Hola 04 Tech, mi negocio está en el Carchi y quiero una página web")} className="btn-verde" style={{ display: "inline-flex", alignSelf: "flex-start", alignItems: "center", gap: 11, padding: "15px 30px", borderRadius: 11, fontSize: 16.5, fontWeight: 700 }}>
+              <a target="_blank" rel="noopener" href={waLink("Hola NorteWeb, mi negocio está en el Carchi y quiero una página web")} className="btn-verde" style={{ display: "inline-flex", alignSelf: "flex-start", alignItems: "center", gap: 11, padding: "15px 30px", borderRadius: 11, fontSize: 16.5, fontWeight: 700 }}>
                 <WaIcon />
                 Escríbenos desde tu ciudad
               </a>
@@ -622,7 +624,7 @@ export default function Home() {
             </div>
 
             <div style={{ marginTop: "clamp(32px, 4vw, 48px)", display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
-              <a target="_blank" rel="noopener" href={waLink("Hola 04 Tech, vi sus proyectos y quiero algo así para mi negocio")} className="btn-amar" style={{ display: "inline-flex", alignItems: "center", gap: 11, padding: "15px 30px", borderRadius: 11, fontSize: 16.5, fontWeight: 700 }}>
+              <a target="_blank" rel="noopener" href={waLink("Hola NorteWeb, vi sus proyectos y quiero algo así para mi negocio")} className="btn-amar" style={{ display: "inline-flex", alignItems: "center", gap: 11, padding: "15px 30px", borderRadius: 11, fontSize: 16.5, fontWeight: 700 }}>
                 <WaIcon />
                 Quiero un proyecto así
               </a>
@@ -725,7 +727,7 @@ export default function Home() {
             </div>
             <p style={{ margin: "26px 0 0", fontSize: 16, color: T.tintaSuave }}>
               ¿Tienes otra pregunta?{" "}
-              <a target="_blank" rel="noopener" href={waLink("Hola 04 Tech, tengo una pregunta sobre mi página web / sistema / bot")} className="tlink">Escríbenos al WhatsApp</a>, te respondemos hoy.
+              <a target="_blank" rel="noopener" href={waLink("Hola NorteWeb, tengo una pregunta sobre mi página web / sistema / bot")} className="tlink">Escríbenos al WhatsApp</a>, te respondemos hoy.
             </p>
           </div>
         </section>
@@ -740,7 +742,7 @@ export default function Home() {
               con el precio y los siguientes pasos — sin compromiso. Página web,
               sistema o bot de WhatsApp, desde $39.
             </p>
-            <a target="_blank" rel="noopener" href={waLink("Hola 04 Tech, quiero conseguir más clientes. ¿Empezamos?")} className="btn-amar" style={{ display: "inline-flex", alignItems: "center", gap: 11, padding: "18px 40px", borderRadius: 12, fontSize: 17.5, fontWeight: 700, boxShadow: "0 16px 36px rgba(0,0,0,0.28)" }}>
+            <a target="_blank" rel="noopener" href={waLink("Hola NorteWeb, quiero conseguir más clientes. ¿Empezamos?")} className="btn-amar" style={{ display: "inline-flex", alignItems: "center", gap: 11, padding: "18px 40px", borderRadius: 12, fontSize: 17.5, fontWeight: 700, boxShadow: "0 16px 36px rgba(0,0,0,0.28)" }}>
               <WaIcon />
               Escríbenos por WhatsApp ahora
             </a>
@@ -774,7 +776,7 @@ export default function Home() {
           </nav>
           <div style={{ display: "flex", flexDirection: "column", gap: 12, fontSize: 15 }}>
             <p style={{ margin: "0 0 4px", fontSize: 12.5, fontWeight: 700, letterSpacing: "0.4px", color: "rgba(241,236,223,0.6)" }}>Contacto</p>
-            <a target="_blank" rel="noopener" href={waLink("Hola 04 Tech, quiero información")} className="footlink">WhatsApp</a>
+            <a target="_blank" rel="noopener" href={waLink("Hola NorteWeb, quiero información")} className="footlink">WhatsApp</a>
             {/* NAP visible — debe coincidir con el JSON-LD (lib/seo.ts) */}
             <a href={`tel:${BUSINESS.phoneE164}`} className="footlink">+593 95 894 8115</a>
             <a href={`mailto:${BUSINESS.email}`} className="footlink">{BUSINESS.email}</a>

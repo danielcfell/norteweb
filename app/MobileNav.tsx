@@ -65,7 +65,7 @@ export default function MobileNav() {
           <a
             target="_blank"
             rel="noopener"
-            href={waLink("Hola 04 Tech, quiero información sobre una página web")}
+            href={waLink("Hola NorteWeb, quiero información sobre una página web")}
             onClick={() => setOpen(false)}
             style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 10, padding: "16px 24px", borderRadius: 11, fontSize: 17, fontWeight: 700, background: "var(--amarillo)", color: "var(--verde-noche)" }}
           >

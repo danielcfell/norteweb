@@ -1,15 +1,15 @@
 import type { CSSProperties } from "react";
 
 /* ============================================================
-   04 Tech — landing (implementación de "04 Tech.dc.html")
+   NorteWeb — landing (implementación de "NorteWeb.dc.html")
    Edita estos valores para configurar el sitio:
    ============================================================ */
 const WHATSAPP = "593999999999"; // solo números
-const CORREO = "hola@04tech.ec";
+const CORREO = "hola@norteweb.ec";
 const MOSTRAR_PORTAFOLIO = true;
 const MOSTRAR_PRECIOS = true;
 
-const waLink = `https://wa.me/${WHATSAPP.replace(/[^0-9]/g, "")}?text=Hola%2004%20Tech%2C%20quiero%20cotizar%20un%20proyecto`;
+const waLink = `https://wa.me/${WHATSAPP.replace(/[^0-9]/g, "")}?text=Hola%20NorteWeb%2C%20quiero%20cotizar%20un%20proyecto`;
 
 const DISPLAY = "var(--font-bricolage), 'Bricolage Grotesque', sans-serif";
 
@@ -105,7 +105,7 @@ const servicios = [
   {
     icon: "◳",
     title: "Sitios web y sistemas a medida",
-    desc: "En 04 Tech te armamos el sitio o sistema que tu negocio necesita, pensado para ti, no una plantilla genérica. Vas a tener una herramienta que funciona como quieres, se ve profesional y te hace la vida más fácil.",
+    desc: "En NorteWeb te armamos el sitio o sistema que tu negocio necesita, pensado para ti, no una plantilla genérica. Vas a tener una herramienta que funciona como quieres, se ve profesional y te hace la vida más fácil.",
   },
   {
     icon: "↻",
@@ -205,7 +205,7 @@ export default function Home() {
                   color: "#23312A",
                 }}
               >
-                04 tech
+                NorteWeb
               </span>
               <span
                 style={{
@@ -1219,14 +1219,14 @@ export default function Home() {
                 color: "#EDEAE0",
               }}
             >
-              04 tech
+              NorteWeb
             </span>
           </div>
           <p style={{ margin: 0, fontSize: 14 }}>
             Tulcán · Provincia del Carchi · Ecuador
           </p>
           <p style={{ margin: 0, fontSize: 14 }}>
-            © 2026 04 Tech. Hecho en el Carchi con orgullo.
+            © 2026 NorteWeb. Hecho en el Carchi con orgullo.
           </p>
         </div>
       </footer>

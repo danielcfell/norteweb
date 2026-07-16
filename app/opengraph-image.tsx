@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const alt =
-  "04 Tech — páginas web, sistemas y bots de WhatsApp en Tulcán y el Carchi";
+  "NorteWeb — páginas web, sistemas y bots de WhatsApp en Tulcán y el Carchi";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -34,8 +34,8 @@ export default function OgImage() {
             )}`}
           />
           <div style={{ display: "flex", fontSize: 40, letterSpacing: "-1.5px" }}>
-            <span style={{ fontWeight: 800 }}>04</span>
-            <span style={{ fontWeight: 500 }}>tech</span>
+            <span style={{ fontWeight: 800 }}>Norte</span>
+            <span style={{ fontWeight: 500 }}>Web</span>
           </div>
         </div>
 
@@ -71,7 +71,7 @@ export default function OgImage() {
               borderRadius: 999,
             }}
           >
-            04tech.ec
+            norteweb.ec
           </div>
           <div style={{ fontSize: 24, color: "rgba(241,236,223,0.7)" }}>
             Tulcán · Julio Andrade · Carchi, Ecuador
