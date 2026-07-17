@@ -12,7 +12,7 @@
    Settings → Domains y cambiar este fallback (o setear NEXT_PUBLIC_SITE_URL).
    El canonical DEBE apuntar al dominio que realmente sirve el sitio. */
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://norteweb.vercel.app"
+  process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://norteweb-ia.vercel.app"
 ).replace(/\/+$/, "");
 
 export const BUSINESS = {
